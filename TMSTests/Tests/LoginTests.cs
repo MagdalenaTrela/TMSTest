@@ -40,5 +40,15 @@ namespace TMSTests
             Assert.True(dashboardPage.welcomeTittle.Displayed);
             
         }
+
+        [Test]
+        public void LoginTest2()
+        {
+            LoginPage loginPage = new LoginPage(driver);
+            DashboardPage dashboardPage = loginPage.Login(email, password);
+
+            Assert.True(dashboardPage.welcomeTittle.Displayed);
+
+        }
     }
 }
