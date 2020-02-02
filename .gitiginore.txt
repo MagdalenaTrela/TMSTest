@@ -1,0 +1,7 @@
+# Build results
+
+[Dd]ebug*/
+[Rr]elease/
+
+[Oo]bj
+.vs/
