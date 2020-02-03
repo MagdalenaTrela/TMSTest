@@ -7,14 +7,14 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TMSTests.Pages;
 
-namespace TMSTests
+namespace TMSTests.Tests
 {
-    [TestFixture]
-    class LoginTests
+    public class FixtureSetup
     {
         IWebDriver driver;
         string email = "admin@test.com";
         string password = "test";
+        public DashboardPage dashboardPage;
 
         [SetUp]
         public void SetUp()
@@ -23,6 +23,9 @@ namespace TMSTests
             driver.Navigate().GoToUrl("https://cphtest.btskyrise.com/PV_test/PayVend.CphTaxi.Web/#/login/");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
+            LoginPage loginPage = new LoginPage(driver);
+            dashboardPage = loginPage.Login(email, password);
+
         }
 
         [TearDown]
@@ -30,25 +33,6 @@ namespace TMSTests
         {
             driver.Quit();
         }
-
-        [Test]
-        public void LoginTest()
-        {
-            LoginPage loginPage = new LoginPage(driver);  
-            DashboardPage dashboardPage = loginPage.Login(email, password);
-            
-            Assert.True(dashboardPage.welcomeTittle.Displayed);
-            
-        }
-
-        [Test]
-        public void LoginTest2()
-        {
-            LoginPage loginPage = new LoginPage(driver);
-            DashboardPage dashboardPage = loginPage.Login(email, password);
-
-            Assert.True(dashboardPage.welcomeTittle.Displayed);
-
-        }
+        
     }
 }
