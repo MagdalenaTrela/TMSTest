@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using TMSTests.Pages;
 
 namespace TMSTests.Tests
 {
-    public class FixtureSetup
+    [SetUpFixture]
+    public class FixtureSetup: OneTimeFixtureSetup
     {
-        IWebDriver driver;
         string email = "admin@test.com";
         string password = "test";
         public DashboardPage dashboardPage;
-
+        
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver(Directory.GetCurrentDirectory());
-            driver.Navigate().GoToUrl("https://cphtest.btskyrise.com/PV_test/PayVend.CphTaxi.Web/#/login/");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-
             LoginPage loginPage = new LoginPage(driver);
             dashboardPage = loginPage.Login(email, password);
-
         }
 
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            //var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            //wait.Until(driver => !(driver.FindElement(By.XPath("//div[text()='Company has been added to automated export']")).Displayed));
+            Thread.Sleep(5000);
+            driver.FindElement(By.ClassName("icon-logout")).Click();
         }
         
     }

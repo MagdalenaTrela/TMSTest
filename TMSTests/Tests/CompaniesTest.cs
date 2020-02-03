@@ -25,6 +25,18 @@ namespace TMSTests
             Assert.True(companiesPage.toast.Displayed);
 
         }
-        
+
+        [Test]
+        public void AddtoAutomatedExpportTests2()
+        {
+
+            CompaniesPage companiesPage = dashboardPage.clickButton(dashboardPage.companiesTab);
+            companiesPage.ClickButton(companiesPage.checkbox);
+            companiesPage.ClickButton(companiesPage.addToAutomatedExport);
+
+            Assert.True(companiesPage.toast.Displayed);
+
+        }
+
     }
 }

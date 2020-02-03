@@ -31,13 +31,29 @@ namespace TMSTests.Pages
 
         public DashboardPage Login(string email, string password)
         {
-            advancedButton.Click();
-            proceedLink.Click();
-            emailInput.Clear();
-            emailInput.SendKeys(email);
-            passwordInput.Clear();
-            passwordInput.SendKeys(password);
-            submitButton.Click();
+            try
+            {
+                if (advancedButton.Enabled)
+                {
+                    advancedButton.Click();
+                    proceedLink.Click();
+                }
+                emailInput.Clear();
+                emailInput.SendKeys(email);
+                passwordInput.Clear();
+                passwordInput.SendKeys(password);
+                submitButton.Click();
+            }
+            catch
+            {
+                emailInput.Clear();
+                emailInput.SendKeys(email);
+                passwordInput.Clear();
+                passwordInput.SendKeys(password);
+                submitButton.Click();
+            }
+            
+            
 
             return new DashboardPage(driver);
         }
